@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notice version="2.0">
+  <api-key>4c34e088c66a4460b88a8a2159cb5003</api-key>
+  <notifier>
+    <name>airbrake_js</name>
+    <version>0.2.0</version>
+    <url>http://airbrake.io</url>
+  </notifier>
+  <error>
+    <class>Error</class>
+    <message><![CDATA[TypeError: $(".new_invite_toggle").fancybox is not a function]]></message>
+    <backtrace><line method="{anonymous}()" file="[PROJECT_ROOT]/javascripts/cache/defaults.js?1375141311" number="21003" /></backtrace>
+  </error>
+  <request>
+    <url>http://www.example.com/admin/products?utf8=%E2%9C%93&query=brigantine&limit=100</url>
+    <component>products</component>
+    <action>index</action>
+    <cgi-data>
+      <var key="HTTP_USER_AGENT">Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:15.0) Gecko/20100101 Firefox/15.0.1</var>
+    </cgi-data>
+  </request>
+  <server-environment>
+    <project-root>http://www.example.com</project-root>
+    <environment-name>production</environment-name>
+  </server-environment>
+</notice>

@@ -17,21 +17,23 @@ module Airbrake
 end
 
 describe ErrorReport do
-  context "with notice without line of backtrace" do
-    let(:xml){
-      Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read
-    }
 
-    let(:error_report) {
-      ErrorReport.new(xml)
-    }
+  let(:error_report) {
+    ErrorReport.new(xml)
+  }
 
     let!(:app) {
       Fabricate(
         :app,
-        :api_key => 'APIKEY'
+        :api_key => api_key
       )
     }
+
+  context "with notice without line of backtrace" do
+    let(:xml){
+      Rails.root.join('spec','fixtures','hoptoad_test_notice.xml').read
+    }
+    let(:api_key) { 'APIKEY' }
 
     describe "#app" do
       it 'find the good app' do
@@ -141,9 +143,9 @@ describe ErrorReport do
 
       it 'find the correct err for the notice' do
         err = Fabricate(:err, :problem => Fabricate(:problem, :resolved => true))
-        
+
         ErrorReport.any_instance.stub(:fingerprint).and_return(err.fingerprint)
-        
+
         expect {
           error_report.generate_notice!
         }.to change {
@@ -229,5 +231,19 @@ describe ErrorReport do
       end
     end
 
+  end
+
+  context "notice report on #527" do
+    let(:xml){
+      Rails.root.join('spec','fixtures','issue_527.xml').read
+    }
+    let(:api_key) { '4c34e088c66a4460b88a8a2159cb5003' }
+    it 'save a notice' do
+      expect {
+        error_report.generate_notice!
+      }.to change {
+        app.reload.problems.count
+      }.by(1)
+    end
   end
 end
