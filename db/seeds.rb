@@ -2,8 +2,8 @@ puts "Seeding database"
 puts "-------------------------------"
 
 # Create an initial Admin User
-admin_username = "errbit"
-admin_email = "errbit@#{Errbit::Config.host}"
+admin_username = "wedtm"
+admin_email = "miles@vimae.com"
 admin_pass  = 'password'
 
 puts "Creating an initial admin user:"
